@@ -1,0 +1,2 @@
+class ItemBrand < ApplicationRecord
+end
