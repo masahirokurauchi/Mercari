@@ -1,0 +1,2 @@
+class CategorySizegroup < ApplicationRecord
+end
