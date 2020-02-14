@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "brand_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand_group_id"], name: "fk_rails_d42e956917"
+    t.index ["brand_name_id"], name: "fk_rails_4af7cf33db"
   end
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -48,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fk_rails_8ef7749967"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -62,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "brand_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand_group_id"], name: "fk_rails_9ebe964d1e"
+    t.index ["category_id"], name: "fk_rails_9506136a79"
   end
 
   create_table "category_sizegroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -69,14 +74,18 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "size_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "fk_rails_2c768a8843"
+    t.index ["size_group_id"], name: "fk_rails_3697fc4098"
   end
 
   create_table "comment_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "comment", null: false
-    t.integer "item_id"
-    t.integer "user_id"
+    t.bigint "item_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "fk_rails_2f0118f334"
+    t.index ["user_id"], name: "fk_rails_0e7ab29a98"
   end
 
   create_table "dealing_chat_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -85,6 +94,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dealing_id"], name: "fk_rails_76fdd5dd9a"
+    t.index ["user_id"], name: "fk_rails_1602a208ba"
   end
 
   create_table "dealings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -95,6 +106,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "fk_rails_73c75bea01"
+    t.index ["item_id"], name: "fk_rails_7bbca02b1e"
   end
 
   create_table "item_brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -102,6 +115,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "brand_name_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand_name_id"], name: "fk_rails_e1d5aae2e0"
+    t.index ["item_id"], name: "fk_rails_161711efd3"
   end
 
   create_table "item_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -109,6 +124,7 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "fk_rails_18c95d5ce3"
   end
 
   create_table "item_sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -116,6 +132,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "size_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "fk_rails_27bab57bd2"
+    t.index ["size_id"], name: "fk_rails_461812b7dd"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -132,6 +150,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "seller_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "fk_rails_89fb86dc8b"
+    t.index ["seller_id"], name: "fk_rails_62a5ac8242"
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -139,6 +159,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "fk_rails_00045f60f7"
+    t.index ["user_id"], name: "fk_rails_1e09b5dabf"
   end
 
   create_table "size_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -160,6 +182,7 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fk_rails_c5d66654bc"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -187,6 +210,33 @@ ActiveRecord::Schema.define(version: 2020_02_07_053158) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dealing_id"], name: "fk_rails_204225f64b"
+    t.index ["user_id"], name: "fk_rails_690f376fee"
   end
 
+  add_foreign_key "brandname_brandgroups", "brand_groups"
+  add_foreign_key "brandname_brandgroups", "brand_names"
+  add_foreign_key "cards", "users"
+  add_foreign_key "category_brandgroups", "brand_groups"
+  add_foreign_key "category_brandgroups", "categories"
+  add_foreign_key "category_sizegroups", "categories"
+  add_foreign_key "category_sizegroups", "size_groups"
+  add_foreign_key "comment_items", "items"
+  add_foreign_key "comment_items", "users"
+  add_foreign_key "dealing_chat_messages", "dealings"
+  add_foreign_key "dealing_chat_messages", "users"
+  add_foreign_key "dealings", "items"
+  add_foreign_key "dealings", "users", column: "buyer_id"
+  add_foreign_key "item_brands", "brand_names"
+  add_foreign_key "item_brands", "items"
+  add_foreign_key "item_images", "items"
+  add_foreign_key "item_sizes", "items"
+  add_foreign_key "item_sizes", "sizes"
+  add_foreign_key "items", "categories"
+  add_foreign_key "items", "users", column: "seller_id"
+  add_foreign_key "likes", "items"
+  add_foreign_key "likes", "users"
+  add_foreign_key "sns_credentials", "users"
+  add_foreign_key "values", "dealings"
+  add_foreign_key "values", "users"
 end
