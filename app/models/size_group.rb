@@ -1,2 +1,0 @@
-class SizeGroup < ApplicationRecord
-end

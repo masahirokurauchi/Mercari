@@ -1,2 +1,0 @@
-class ItemSize < ApplicationRecord
-end
