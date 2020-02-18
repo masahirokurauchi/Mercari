@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+  # registrations_controller.rb
 
   def select  ##登録方法の選択ページ
     redirect_to root_path, alert: "ログインしています。" if user_signed_in?
@@ -19,6 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+    redirect_to new_user_registration_path, alert: "reCAPTCHAを承認してください" and return unless verify_recaptcha
     super if !session["devise.sns_auth"]
     if session["devise.sns_auth"]
       pass = Devise.friendly_token
