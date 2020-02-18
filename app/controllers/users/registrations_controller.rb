@@ -4,6 +4,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+
+  def select  ##登録方法の選択ページ
+    session.delete(:"devise.sns_auth") if session["devise.sns_auth"]
+  end
+
+  def new
+    ## ↓sessionにsns認証のデータがある場合
+    @user = User.new(session["devise.sns_auth"]["user"]) if session["devise.sns_auth"]
+    ## ↓sessionにsns認証のデータがない場合
+    super if !session["devise.sns_auth"]
+  end
+
+  def create
+    super if !session["devise.sns_auth"]
+    if session["devise.sns_auth"]
+      pass = Devise.friendly_token
+      params[:user][:password] = pass
+      params[:user][:password_confirmation] = pass
+      sns = SnsCredential.new(session["devise.sns_auth"]["sns"])
+      super
+      if user_signed_in?
+        sns.user_id = current_user.id
+        sns.save
+      end
+    end
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
