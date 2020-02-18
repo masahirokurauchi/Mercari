@@ -36,26 +36,26 @@
   /       = link_to "" do
   /         = icon "fas", "tags", class:"header-bottom-left__button--red"
   /         ブランドから探す
-    / .header-bottom-right
-    /   - if user_signed_in?
-    /     .header-bottom-right__button
-    /       = link_to "" do
-    /         = icon "fas", "heart", class:"header-bottom-right__button--gray"
-    /         いいね!一覧
-    /     .header-bottom-right__button
-    /       = link_to "" do
-    /         = icon "fas", "bell", class:"header-bottom-right__button--gray"
-    /         お知らせ
-    /     .header-bottom-right__button
-    /       = link_to "" do
-    /         = icon "fas", "check", class:"header-bottom-right__button--gray"
-    /         やることリスト
-    /     .header-bottom-right__button
-    /       = link_to user_path(1) do
-    /         = image_tag 'user_noimage.png', class:"header-bottom-right__mypage"
-    /         マイページ
-    /   - else
-    /     = link_to select_registration_path,  data: {turbolinks: :false} do
-    /       新規会員登録
-    /     = link_to new_user_session_path, data: {turbolinks: :false}  do
-    /       ログイン
+  /   .header-bottom-right
+  /     - if user_signed_in?
+  /       .header-bottom-right__button
+  /         = link_to "" do
+  /           = icon "fas", "heart", class:"header-bottom-right__button--gray"
+  /           いいね!一覧
+  /       .header-bottom-right__button
+  /         = link_to "" do
+  /           = icon "fas", "bell", class:"header-bottom-right__button--gray"
+  /           お知らせ
+  /       .header-bottom-right__button
+  /         = link_to "" do
+  /           = icon "fas", "check", class:"header-bottom-right__button--gray"
+  /           やることリスト
+  /       .header-bottom-right__button
+  /         = link_to user_path(1) do
+  /           = image_tag 'user_noimage.png', class:"header-bottom-right__mypage"
+  /           マイページ
+  /     - else
+  /       = link_to select_registration_path,  data: {turbolinks: :false} do
+  /         新規会員登録
+  /       = link_to new_user_session_path, data: {turbolinks: :false}  do
+  /         ログイン
