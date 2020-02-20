@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     redirect_to new_user_registration_path, alert: "reCAPTCHAを承認してください" and return unless verify_recaptcha
-    super if !session["devise.sns_auth"]
+    # super if !session["devise.sns_auth"]
     if session["devise.sns_auth"]
       pass = Devise.friendly_token
       params[:user][:password] = pass
@@ -32,7 +32,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
         sns.save
       end
     end
+    redirect_to confirm_phone_path
   end
+
+  def confirm_phone  ##電話番号確認
+  end
+
+  def new_address
+  end
+
+  # def after_sign_out_path_for(resource)
+  #   '/users/confirm_phone' 
+  # end
 
   # GET /resource/sign_up
   # def new
