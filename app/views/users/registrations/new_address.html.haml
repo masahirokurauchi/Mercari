@@ -2,7 +2,9 @@
   .block__menu
     住所入力
 .block.horizontal-padding-25
-  = form_with model: @address, url: regist_address_path, id: 'new_address', class: 'new_address', local: true do |f|
+  / = form_with model: @address, url: regist_address_path, id: 'new_address', class: 'new_address', local: true do |f|
+  / use confirm_path to just does work this view to test
+  = form_with model: @address, url: confirm_phone_path, id: 'new_address', class: 'new_address', local: true do |f|
     .input-field
       .input-field-main
         = f.label :postal_code, "郵便番号"
@@ -16,7 +18,9 @@
         %span.required-true
           必須
         %br
-        = f.collection_select :prefecture, Prefecture.all, :id , :name, {include_blank: "---", selected: @address.prefecture}, required: true
+        / = f.collection_select :prefecture, Prefecture.all, :id , :name, {include_blank: "---", selected: @address.prefecture}, 
+        / delete @address.prefecture to just does work for thsi view to test
+        = f.collection_select :prefecture, Prefecture.all, :id , :name, {include_blank: "---"}, required: true
     .input-field
       .input-field-main
         = f.label :city, "市区町村"

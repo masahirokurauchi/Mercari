@@ -57,14 +57,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new_address
-
-    session[:phone_number] = params[:session][:phone_number]
-    session[:postal_code] = params[:session][:postal_code]
-    session[:prefecture] = params[:session][:prefecture]
-    session[:city] = params[:session][:city]
-    session[:house_number] = params[:session][:house_number]
-    session[:building_name] = params[:session][:building_name]
   end
+
+    # session[:phone_number] = params[:address][:phone_number]
+    # session[:postal_code] = params[:address][:postal_code]
+    # session[:prefecture] = params[:address][:prefecture]
+    # session[:city] = params[:address][:city]
+    # session[:house_number] = params[:address][:house_number]
+    # session[:building_name] = params[:address][:building_name]
 
   # def after_sign_out_path_for(resource)
   #   '/users/confirm_phone' 
