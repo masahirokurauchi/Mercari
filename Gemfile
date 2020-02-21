@@ -70,3 +70,4 @@ gem 'omniauth-rails_csrf_protection'
 gem 'active_hash'
 gem 'recaptcha', require: "recaptcha/rails"
 gem 'pry-rails'
+gem 'payjp'
