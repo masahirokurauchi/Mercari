@@ -32,6 +32,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
         sns.save
       end
     end
+
+    #storing params to Sessions so as to save User record
+    session[:email] = params[:user][:email]
+    session[:nickname] = params[:user][:nickname]
+    session[:last_name] = params[:user][:last_name]
+    session[:first_name] = params[:user][:first_name]
+    session[:last_name_reading] = params[:user][:last_name_reading]
+    session[:first_name_reading] = params[:user][:first_name_reading]
+    session[:birthday] = params[:user][:birthday]
+
+    if params[:user][:password].present?
+      session[:password] = params[:user][:password]
+      session[:password_confirmation] = params[:user][:password_confirmation]
+    else
+      session[:password] = "Devise.friendly_token.first(6)"
+      session[:password_confirmation] = "Devise.friendly_token.first(6)"
+    end
+     
     redirect_to confirm_phone_path
   end
 
@@ -39,6 +57,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new_address
+
+    session[:phone_number] = params[:session][:phone_number]
+    session[:postal_code] = params[:session][:postal_code]
+    session[:prefecture] = params[:session][:prefecture]
+    session[:city] = params[:session][:city]
+    session[:house_number] = params[:session][:house_number]
+    session[:building_name] = params[:session][:building_name]
   end
 
   # def after_sign_out_path_for(resource)
