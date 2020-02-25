@@ -6,6 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # registrations_controller.rb
 
   def select  ##Select how to regist
+    #To sign out at this action because signout function is not developed
+    sign_out @user
+
     redirect_to root_path, alert: "ログインしています。" if user_signed_in?
     @auth_text = "で登録する"
     session.delete(:"devise.sns_auth") if session["devise.sns_auth"]
@@ -95,8 +98,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user.save
     @user.addresse.save
 
+    if session[:user_id] = @user.id
+      sign_up(@user, current_user)
+      redirect_to new_cards_url
+    else
+      redirect_to select_registration_url
+    end
 
-    render "cards/new"
+
+  end
+
+  def completed
   end
 
     
