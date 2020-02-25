@@ -1,2 +1,0 @@
-class DealingChatMessage < ApplicationRecord
-end

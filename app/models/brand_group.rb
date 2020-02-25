@@ -1,2 +1,0 @@
-class BrandGroup < ApplicationRecord
-end
