@@ -2,7 +2,7 @@ $(function () {
 
   if (!$('#regist_card')[0]) return false; //カード登録ページではないなら以降実行しない。
 
-  Payjp.setPublicKey("pk_test_hogehogefugafuga"); //公開鍵を読み込む。
+  Payjp.setPublicKey("pk_test_9993b7a16e4609ddc21ad47f"); //公開鍵を読み込む。
   let regist_button = $("#regist_card"); //カード入力フォームの登録ボタン。
 
   regist_button.on("click", function (e) { //登録ボタンを押したとき（ここはsubmitではなくclickにしておく）。

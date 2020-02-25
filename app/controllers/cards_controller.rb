@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :authenticate_user!, except: [:create]
+  # before_action :authenticate_user!, except: [:create]
 
   def new
     @card = Card.new
