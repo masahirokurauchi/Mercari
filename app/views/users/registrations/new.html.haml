@@ -60,9 +60,7 @@
           %span.required-true
             必須
           .input-field-multiple
-            = raw sprintf(f.date_select(:birthday,{ start_year: Date.today.year, end_year: Date.today.year-120,
-          prompt:"--", use_month_numbers: true, with_css_classes: true,discard_minute:true,
-          date_separator: '%s', datetime_separator: '%s'}, {required: true}), '<div class="input-field-multiple__separate-text">年</div>', '<div class="input-field-multiple__separate-text">月</div>') +'<div class="input-field-multiple__separate-text">日</div>'
+            = raw sprintf(f.date_select(:birthday,{ start_year: Date.today.year, end_year: Date.today.year-120, prompt:"--", use_month_numbers: true, with_css_classes: true,discard_minute:true, date_separator: '%s', datetime_separator: '%s'}, {required: true}), '<div class="input-field-multiple__separate-text">年</div>', '<div class="input-field-multiple__separate-text">月</div>') +'<div class="input-field-multiple__separate-text">日</div>'
       .information
         .information__text
           .information__text--gray

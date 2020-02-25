@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook google]
   
   #Association
-  has_one :address, dependent: :destroy
+  has_one :addresse, dependent: :destroy
   has_one :sns_credential, dependent: :destroy
 
   #Validation
@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :last_name_reading, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
 
   #To create User and addresses record simultaneously
-  accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :addresse
 
   #For Facebook Authitification
   def self.from_omniauth(auth)

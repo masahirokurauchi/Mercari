@@ -5,16 +5,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   # registrations_controller.rb
 
-  def select  ##登録方法の選択ページ
+  def select  ##Select how to regist
     redirect_to root_path, alert: "ログインしています。" if user_signed_in?
     @auth_text = "で登録する"
     session.delete(:"devise.sns_auth") if session["devise.sns_auth"]
   end
 
   def new
-    ## ↓sessionにsns認証のデータがある場合
+    ## ↓If there is SNS data in session
     @user = User.new(session["devise.sns_auth"]["user"]) if session["devise.sns_auth"]
-    ## ↓sessionにsns認証のデータがない場合
+    ## ↓If there is Not SNS data in session
     super if !session["devise.sns_auth"]
   end
 
@@ -40,7 +40,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:first_name] = params[:user][:first_name]
     session[:last_name_reading] = params[:user][:last_name_reading]
     session[:first_name_reading] = params[:user][:first_name_reading]
-    session[:birthday] = params[:user][:birthday]
+    # session[:birthday] = params[:user][:birthday]
+    session[:birthday] = "#{params[:user]["birthday(1i)"]}-#{params[:user]["birthday(2i)"]}-#{params[:user]["birthday(3i)"]}"
 
     if params[:user][:password].present?
       session[:password] = params[:user][:password]
@@ -53,18 +54,52 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to confirm_phone_path
   end
 
-  def confirm_phone  ##電話番号確認
+  def confirm_phone
   end
 
   def new_address
   end
 
-    # session[:phone_number] = params[:address][:phone_number]
-    # session[:postal_code] = params[:address][:postal_code]
-    # session[:prefecture] = params[:address][:prefecture]
-    # session[:city] = params[:address][:city]
-    # session[:house_number] = params[:address][:house_number]
-    # session[:building_name] = params[:address][:building_name]
+  def regist_address
+
+    @user = User.new(
+      email: session[:email],
+      password: session[:password],
+      password_confirmation: session[:password_confirmation],
+      nickname: session[:nickname],
+      first_name: session[:first_name],
+      first_name_reading: session[:first_name_reading],
+      last_name: session[:last_name],
+      last_name_reading: session[:last_name_reading],
+      birthday: session[:birthday]
+    )
+
+    session[:phone_number] = params[:phone_number]
+    session[:postal_code] = params[:postal_code]
+    session[:prefecture] = params[:prefecture]
+    session[:city] = params[:city]
+    session[:house_number] = params[:house_number]
+    session[:building_name] = params[:building_name]
+    session[:user_id] = @user.id
+
+    @user.addresse = @user.build_addresse(
+      phone_number: session[:phone_number],
+      postal_code: session[:postal_code],
+      prefecture: session[:prefecture],
+      city: session[:city],
+      house_number: session[:house_number],
+      building_name: session[:building_name],
+      user_id: session[:user_id]
+    )
+
+    @user.save
+    @user.addresse.save
+
+
+    render "cards/new"
+  end
+
+    
 
   # def after_sign_out_path_for(resource)
   #   '/users/confirm_phone' 
