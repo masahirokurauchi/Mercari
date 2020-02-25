@@ -15,7 +15,7 @@ class CardsController < ApplicationController
     ## 保存に成功した場合
     @card.user_id = current_user.id
     @card.save
-    redirect_to cards_path and return
+    redirect_to regist_completed_url and return
   end
 
   def show
