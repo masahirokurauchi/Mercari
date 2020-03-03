@@ -32,7 +32,35 @@ Rails.application.routes.draw do
       post "purchase"
     end
   end
+
   resources :categories, only: [:index, :show]
   resource :cards, only: [:new, :create, :show, :update, :destroy]
+
+  resources :items do
+    collection do
+      get "scraping_category"
+      get "scraping_autobike"
+      get "scraping_car_parts"
+      get "scraping_cosme"
+      get "scraping_domestic_car"
+      get "scraping_foods"
+      get "scraping_forign_car"
+      get "scraping_game"
+      get "scraping_instrument"
+      get "scraping_interior"
+      get "scraping_kids"
+      get "scraping_kitchen"
+      get "scraping_ladies"
+      get "scraping_mens"
+      get "scraping_phone"
+      get "scraping_sports"
+      get "scraping_watch"
+    end
+  end
+
+  namespace :api do
+    resources :items, only: [:create, :update], defaults: { format: 'json' }
+    resources :categories, only: [:index], defaults: { format: 'json' }
+  end
 
 end

@@ -25,7 +25,6 @@
               クリックしてファイルをアップロード
     #image-file-fields
       = f.fields_for :item_images do |image|
-        -# SHhould I make multiple faulse not true?????????????????????????????????????????????????????????????? this below
         = image.file_field :image, class: "new-item-image", id: "file_field_index_#{image.index}", name: "item[item_images_attributes][#{image.index}][image]", accept: "image/*", data: {index: image.index}, multiple: false
         - if image.object.persisted?
           = image.check_box :_destroy, include_hidden: false
@@ -58,7 +57,8 @@
         = f.label :parent_category_id, "カテゴリ"
         %span.required-true
           必須
-        = f.collection_select :category_id, Categorie.roots, :id , :name, {include_blank: "---", selected: item.category&.root_id}, required: true, class: "select-category", id: "parent-category"
+        / = f.collection_select :parent_category_id, Categorie.parent_categories, :id , :name, {include_blank: "---"}, required: true, class: "select-category", name: ""
+        = f.collection_select :category_id, Categorie.roots, :id , :name, {include_blank: "---", selected: item.categorie&.root_id}, required: true, class: "select-category", id: "parent-category"
         - if item.persisted?
           = f.collection_select :category_id, item.category.root.children, :id , :name, {include_blank: "---", selected: item.category.parent_id}, required: true, class: "select-category", id: "child-category"
           = f.collection_select :category_id, item.category.siblings, :id , :name, {include_blank: "---", selected: item.category_id}, required: true, class: "select-category", id: "grandchild-category"
