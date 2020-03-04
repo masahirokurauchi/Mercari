@@ -50,7 +50,6 @@ $(function(){
 	        if (categories.choices.length == 0){
 	          return false;
 	        }
-	        console.log(categories);
 	        var html = buildCategoryForm(categories) // カテゴリのフォームを組み立ててる。
 	        // ↓追加
 	        $(this).nextAll('.select-category').remove();
