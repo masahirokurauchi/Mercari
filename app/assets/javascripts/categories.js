@@ -7,7 +7,7 @@ $(function(){
 	    });
 	    
 	    let blank = "---";
-	    
+	     
 	    let html = `
 	                <select required="required" name="item[category_id]" class="select-category">
 	                  <option value="">${blank}</option>
