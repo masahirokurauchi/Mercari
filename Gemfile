@@ -72,3 +72,7 @@ gem 'recaptcha', require: "recaptcha/rails"
 gem 'pry-rails'
 gem 'payjp'
 gem 'jquery-rails'
+gem 'activerecord-import'
+gem 'mechanize'
+gem 'carrierwave'
+gem 'ancestry'
