@@ -3,7 +3,6 @@ class Api::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.save
-    # もしエラーがあれば
     @error = @item.errors.full_messages if @item.errors.full_messages.present?
   end
 
