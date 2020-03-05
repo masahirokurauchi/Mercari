@@ -26,12 +26,12 @@
           = category.name
 .pickups.horizontal-padding-15
   %br
-  - @sorted_items&.each do |items|
+  - @new_items_arrays&.each do |items|
     .pickup
       %span.pickup__name
-        = items[0].category.root.name
+        = items[0].categorie.root.name
         新着アイテム
-      = link_to category_path(items[0].category) do
+      = link_to category_path(items[0].categorie) do
         %span.pickup__display-all
           もっと見る >
       .pickup__items{class: "#{'auto-slick' if items.length >= 4}"}
