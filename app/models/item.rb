@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   validates :item_images, length: { minimum: 1, message: "is none"}
   
   has_many :item_images, dependent: :destroy
-  belongs_to :categorie, class_name: 'Categorie', :foreign_key => 'category_id'
+  belongs_to :categorie, class_name: 'Categorie', foreign_key: 'category_id'
   belongs_to :user
   accepts_nested_attributes_for :item_images, allow_destroy: true
 
