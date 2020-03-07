@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   validates :item_images, length: { minimum: 1, message: "is none"}
   
   has_many :item_images, dependent: :destroy
-  belongs_to :categorie, optional: true
+  belongs_to :categorie, class_name: 'Categorie', foreign_key: 'category_id'
   belongs_to :user
   accepts_nested_attributes_for :item_images, allow_destroy: true
 
@@ -16,4 +16,9 @@ class Item < ApplicationRecord
   enum delivery_method:{"未定": 0, "らくらくメルカリ便": 1, "ゆうメール": 2, "レターパック": 3, "普通郵便（定形、定形外）": 4, "クロネコヤマト": 5, "ゆうパック": 6, "クリックポスト": 7, "ゆうパケット": 8}
   enum delivery_days:{"1〜2日で発送": 0, "2〜3日で発送": 1, "4〜7日で発送": 2}
   enum deal:{"販売中": 0, "売り切れ": 1}
+
+  # カテゴリの取得メソッド
+  def self.search_by_category(category)
+    return Item.where(category_id: category).includes(:item_images, :categorie)
+  end
 end

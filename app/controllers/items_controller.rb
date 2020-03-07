@@ -3,6 +3,17 @@ class ItemsController < ApplicationController
   #to use no_menu layout
   layout "no_menu"
 
+  def index
+    return false if Item.count == 0 ## 商品数がゼロのときはランキングが作れないのでここで終了
+    @new_items_arrays = []
+    @categories = ["チノパン", "サンダル", "アート/写真", "正月"] ## 新着アイテムを表示したいカテゴリの名前たち
+    @categories = @categories.map{|category_name| Categorie.find_by(name: category_name)} ## カテゴリの名前たちを使ってカテゴリのインスタンスが入った配列を作成
+    @categories.each do |category|
+      @new_items_arrays << Item.search_by_category(category.subtree_ids).order("created_at DESC").limit(4) ## カテゴリごとの新着アイテムを配列化する
+      
+    end
+  end
+
   def new ## 出品ページ
     @item = Item.new
     @item.item_images.build  ## 新規画像用
