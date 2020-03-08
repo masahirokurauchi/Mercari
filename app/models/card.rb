@@ -28,4 +28,11 @@ class Card < ApplicationRecord
       card[:brand] = card_data.brand
       return card
     end
+
+    def self.get_customer(customer_token)
+      return nil unless customer_token
+      Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
+      customer = Payjp::Customer.retrieve(customer_token)
+      return customer
+    end
 end

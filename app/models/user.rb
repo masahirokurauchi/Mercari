@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one :addresse, dependent: :destroy
   has_one :sns_credential, dependent: :destroy
   has_one :card
+  has_many :dealings
 
   #Validation
   validates :nickname, :birthday, :earnings, :points, presence: true
