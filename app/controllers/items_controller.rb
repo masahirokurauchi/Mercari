@@ -32,7 +32,8 @@ class ItemsController < ApplicationController
       @item.with_lock do
         ## 取引状態を更新
         @item.update(deal: '売り切れ')
-        Dealing.create(item_id: @item.id, user_id: current_user.id)
+        # binding.pry
+        Dealing.create(item_id: @item.id, buyer_id: current_user.id)
 
         ## 秘密鍵を渡して認証
         Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
