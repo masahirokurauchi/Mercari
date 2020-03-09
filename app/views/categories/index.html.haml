@@ -1,11 +1,11 @@
 .parent-categories.horizontal-padding-25
   .parent-categories__title
     カテゴリー一覧
-  - Category.roots.each do |category|
+  - Categorie.roots.each do |category|
     %span.parent-categories__category
       = link_to category_path(category) do
         = category.name
-- Category.roots.each do |parent_category|
+- Categorie.roots.each do |parent_category|
   .categories.horizontal-padding-25
     .parent-category
       = link_to category_path(parent_category) do
