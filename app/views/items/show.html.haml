@@ -70,7 +70,7 @@
         （税込）
       .item-show__price--right
         = @item.delivery_fee_payer
-    - if (@item.deal == "販売中" ) && (@item.user_id != current_user.id) && (user_signed_in)
+    - if (@item.deal == "販売中" ) && (@item.user_id != current_user.id) && (user_signed_in?)
       = link_to purchase_confirmation_item_path(@item) do
         .button.back-red
           購入画面に進む
