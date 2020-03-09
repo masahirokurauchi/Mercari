@@ -13,7 +13,6 @@ class ItemsController < ApplicationController
     @categories = @categories.map{|category_name| Categorie.find_by(name: category_name)} ## カテゴリの名前たちを使ってカテゴリのインスタンスが入った配列を作成
     @categories.each do |category|
       @new_items_arrays << Item.search_by_category(category.subtree_ids).order("created_at DESC").limit(4) ## カテゴリごとの新着アイテムを配列化する
-
     end
   end
 
