@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :set_item, only: [:edit, :update, :destroy, :show, :purchase_confirmation, :purchase] ## @itemを定義する
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :purchase_confirmation, :purchase] ## ログイン必須アクション
+  before_action :authenticate_user!, except: [:index, :show, :item_selling?, :seller?, :not_seller?] ## ログイン必須アクション
   before_action :item_selling?, only: [:edit, :update, :destroy, :purchase_confirmation, :purchase] ## 売り切れではないかチェック
   before_action :seller?, only: [:edit, :update, :destroy] ## 出品者のみ可能なアクション
   before_action :not_seller?, only: [:purchase] ## 出品者ではない人のみ可能なアクション
