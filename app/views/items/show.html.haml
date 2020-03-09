@@ -17,27 +17,27 @@
           %th.item-data__row--title
             出品者
           %td.item-data__row--value
-            = @item.seller.nickname
+            = @item.user.nickname
         %tr.item-data__row
           %th.item-data__row--title
             カテゴリ
           %td.item-data__row--value
-            = link_to @item.category.root.name, category_path(@item.category.root)
+            = link_to @item.categorie.root.name, category_path(@item.categorie.root)
             %br
-            = link_to ">#{@item.category.parent.name}", category_path(@item.category.parent)
+            = link_to ">#{@item.categorie.parent.name}", category_path(@item.categorie.parent)
             %br
-            = link_to ">#{@item.category.name}", category_path(@item.category)
+            = link_to ">#{@item.categorie.name}", category_path(@item.categorie)
         %tr.item-data__row
-          %th.item-data__row--title
-            ブランド
-          %td.item-data__row--value
-            = @item.get_brand
-        - if @item.item_size&.size&.name
-          %tr.item-data__row
-            %th.item-data__row--title
-              サイズ
-            %td.item-data__row--value
-              = @item.item_size.size.name
+        /   %th.item-data__row--title
+        /     ブランド
+        /   %td.item-data__row--value
+        /     = @item.get_brand
+        / - if @item.item_size&.size&.name
+        /   %tr.item-data__row
+        /     %th.item-data__row--title
+        /       サイズ
+        /     %td.item-data__row--value
+        /       = @item.item_size.size.name
         %tr.item-data__row
           %th.item-data__row--title
             商品の状態
@@ -70,13 +70,16 @@
         （税込）
       .item-show__price--right
         = @item.delivery_fee_payer
-    = link_to purchase_confirmation_item_path(@item) do
-      .button.back-red
-        購入画面に進む
-    - if user_signed_in?
-      - if @item.seller_id == current_user.id
-        = link_to edit_item_path(@item) do
-          .button.back-gray
-            商品を編集する
+    - if (@item.deal == "販売中" ) && (@item.user_id != current_user.id) && (user_signed_in?)
+      = link_to purchase_confirmation_item_path(@item) do
+        .button.back-red
+          購入画面に進む
+    - if (user_signed_in?) && (@item.user_id == current_user.id)
+      = link_to edit_item_path(@item) do
+        .button.back-gray
+          商品を編集する
+      = link_to item_path(@item), method: :delete do
+        .button.back-gray
+          商品を削除する
     .item-show__detail
       = simple_format @item.detail
