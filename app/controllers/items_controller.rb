@@ -72,9 +72,8 @@ class ItemsController < ApplicationController
   end
 
   def edit ## 商品編集ページ
-    render layout: "no_menu"
-    @item = current_user.items.find(params[:id])
     @item.item_images.build  ## 新規画像用
+    render layout: "no_menu"
   end
 
   def create
