@@ -16,8 +16,8 @@
         %tr.item-data__row
           %th.item-data__row--title
             出品者
-          / %td.item-data__row--value
-          /   = @item.seller.nickname
+          %td.item-data__row--value
+            = @item.user.nickname
         %tr.item-data__row
           %th.item-data__row--title
             カテゴリ
@@ -75,11 +75,10 @@
         .button.back-red
           購入画面に進む
     - if user_signed_in?
-      - if (@item.user_id == current_user.id) && (@item.deal = "販売中")
+      - if (@item.user_id == current_user.id)
         = link_to edit_item_path(@item) do
           .button.back-gray
             商品を編集する
-      - elsif (@item.user_id == current_user.id) && (@item.deal = "売り切れ")
         = link_to item_path(@item), method: :delete do
           .button.back-gray
             商品を削除する
