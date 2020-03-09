@@ -10,11 +10,11 @@
     .parent-category
       = link_to category_path(parent_category) do
         = parent_category.name
-    - parent_category.get_children.each do |child_category|
+    - parent_category.children.each do |child_category|
       .child-category
         = child_category.name
         .child-category__grand-child-categories
           = link_to category_path(child_category), class: "child-category__grand-child-categories--category" do
             すべて
-          - child_category.get_children.each do |grandchild_category|
+          - child_category.children.each do |grandchild_category|
             = link_to grandchild_category.name, category_path(grandchild_category), class: "child-category__grand-child-categories--category"

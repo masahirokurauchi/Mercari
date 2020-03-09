@@ -8,12 +8,12 @@ class ItemsController < ApplicationController
 
   def index
     return false if Item.count == 0 ## 商品数がゼロのときはランキングが作れないのでここで終了
-    @new_items_arrays = []
-    @categories = ["チノパン", "サンダル", "アート/写真", "正月"] ## 新着アイテムを表示したいカテゴリの名前たち
-    @categories = @categories.map{|category_name| Categorie.find_by(name: category_name)} ## カテゴリの名前たちを使ってカテゴリのインスタンスが入った配列を作成
-    @categories.each do |category|
-      @new_items_arrays << Item.search_by_category(category.subtree_ids).order("created_at DESC").limit(4) ## カテゴリごとの新着アイテムを配列化する
-    end
+    categories = Categorie.roots ## 親カテゴリたちを配列で取得
+    items = categories.map{|root| Item.search_by_category(root.subtree_ids)} ## カテゴリごとの商品リストを取得
+    @sorted_items = items.sort { |a,b| b.length <=> a.length} ## カテゴリごとの商品リストを商品数が多い順で並び替える
+    @sorted_items = @sorted_items[0..3].map{|items| items.order("created_at DESC").limit(4)} ## 商品数が多いカテゴリ上位4つのみ表示したい。また、1つのカテゴリのうち新着商品は4つだけ表示する。
+    @sorted_items = @sorted_items.reject(&:blank?) ## 商品数がゼロのカテゴリを削除する
+    @category_ranking = @sorted_items.map{|items| items[0].categorie.root} ## 商品数が多いカテゴリのランキングを定義
   end
 
   def show
