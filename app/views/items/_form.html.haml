@@ -66,26 +66,26 @@
         %br.select-category
         - if item.persisted?
           = f.collection_select :category_id, item.categorie.root.children, :id , :name, {include_blank: "---", selected: item.categorie.parent_id}, required: true, class: "select-category", id: "child-category"
-          = f.collection_select :category_id, item.categorie.siblings, :id , :name, {include_blank: "---", selected: item.categorie_id}, required: true, class: "select-category", id: "grandchild-category"
+          = f.collection_select :category_id, item.categorie.siblings, :id , :name, {include_blank: "---", selected: item.category_id}, required: true, class: "select-category", id: "grandchild-category"
         .error-field{data:{column_name: "category"}}
         - if item.persisted?
-          -if item.category.get_brand_groups.length != 0
-            = f.label :brand_name, for: "brand-search__form", class: "select-category" do
-              ブランド
-            %span.required-false.select-category
-              任意
-            #brand-search.select-category
-              = f.text_field  :brand_name, name: "brand_name", id: "brand-search__form"
-              #brand-search__result
-            .error-field.select-category{data:{column_name: "brand"}}
-          -if item.category.get_size_list.length != 0
-            = f.label :size, for: "size-form", class: "select-category" do
-              サイズ
-            %span.required-true.select-category
-              必須
-            .select-category
-              = f. collection_select :size, item.category.get_size_list, :id, :name, {include_blank: "---", selected: item.item_size&.size&.id}, {id: "size-form", required: true,  name: "item[item_size_attributes][size_id]"}
-              .error-field.select-category{data:{column_name: "item_size.size"}}
+          / -if item.categorie.get_brand_groups.length != 0
+          /   = f.label :brand_name, for: "brand-search__form", class: "select-category" do
+          /     ブランド
+          /   %span.required-false.select-category
+          /     任意
+          /   #brand-search.select-category
+          /     = f.text_field  :brand_name, name: "brand_name", id: "brand-search__form"
+          /     #brand-search__result
+          /   .error-field.select-category{data:{column_name: "brand"}}
+          / -if item.category.get_size_list.length != 0
+          /   = f.label :size, for: "size-form", class: "select-category" do
+          /     サイズ
+          /   %span.required-true.select-category
+          /     必須
+          /   .select-category
+          /     = f. collection_select :size, item.category.get_size_list, :id, :name, {include_blank: "---", selected: item.item_size&.size&.id}, {id: "size-form", required: true,  name: "item[item_size_attributes][size_id]"}
+          /     .error-field.select-category{data:{column_name: "item_size.size"}}
         = f.label :condition, "商品の状態"
         %span.required-true
           必須
