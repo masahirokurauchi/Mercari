@@ -24,7 +24,9 @@ class Item < ApplicationRecord
   scope :selling, -> { where(deal: 0) } ##販売中
   scope :sold, -> { where(deal: 1) } ##売り切れ
   scope :dealing, -> { where(deal: 2) } ##取引中
-  scope :with_user, -> { where(user_id: user_id) } ## ログインユーザー
+  scope :with_user, -> (user_id) { where(user_id: user_id) } ## ログインユーザー
+  scope :with_buyer, -> (user_id) { where(dealings: { buyer_id: user_id } ) } ## 購入者
+
 
   # カテゴリの取得メソッド
   def self.search_by_category(category)
@@ -33,26 +35,26 @@ class Item < ApplicationRecord
 
   ## 出品中の商品一覧取得メソッド
   def self.get_selling_items(user_id)
-    return Item.with_user.selling.includes(:item_images, :categorie)
+    return Item.with_user(user_id).selling.includes(:item_images, :categorie)
   end
 
   ## 売却済みの商品一覧取得メソッド
   def self.get_sold_items(user_id)
-    return Item.with_user.sold.includes(:item_images, :categorie)
+    return Item.with_user(user_id).sold.includes(:item_images, :categorie)
   end
 
   ## 取引中の商品一覧取得メソッド
   def self.get_selling_progress_items(user_id)
-    return Item.with_user.dealing.includes(:item_images, :categorie)
+    return Item.with_user(user_id).dealing.includes(:item_images, :categorie)
   end
 
   ## 取引中の購入予定商品一覧取得メソッド
   def self.get_bought_progress_items(user_id)
-    return Item.with_dealing.dealing.includes(:item_images, :categorie)
+    return Item.with_dealing.with_buyer(user_id).dealing.includes(:item_images, :categorie)
   end
 
   ## 過去に購入済みの商品一覧取得メソッド
   def self.get_bought_past_items(user_id)
-    return Item.with_dealing.includes(:item_images, :categorie)
+    return Item.with_dealing.with_buyer(user_id).includes(:item_images, :categorie)
   end
 end
