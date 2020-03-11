@@ -51,7 +51,7 @@
             = icon "fas", "check", class:"header-bottom-right__button--gray"
             やることリスト
         .header-bottom-right__button
-          = link_to user_path(1) do
+          = link_to user_path(current_user.id) do
             = image_tag 'user_noimage.png', class:"header-bottom-right__mypage"
             マイページ
       - else
