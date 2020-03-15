@@ -83,6 +83,11 @@ class ItemsController < ApplicationController
     redirect_to root_path, notice: "商品の編集に成功しました。"
   end
 
+  def destroy
+    @item.destroy
+    redirect_to root_path, notice: "商品の削除に成功しました。"
+  end
+
   private
   def set_item ## @itemを定義する
     @item = Item.find(params[:id])
