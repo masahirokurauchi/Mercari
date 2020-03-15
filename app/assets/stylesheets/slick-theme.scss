@@ -151,7 +151,7 @@ $slick-opacity-not-active: 0.25 !default;
 
 .slick-dots {
     position: absolute;
-    bottom: -25px;
+    bottom: 5px;
     list-style: none;
     display: block;
     text-align: center;
@@ -176,7 +176,7 @@ $slick-opacity-not-active: 0.25 !default;
             width: 20px;
             outline: none;
             line-height: 0px;
-            font-size: 0px;
+            font-size: 3px;
             color: transparent;
             padding: 5px;
             cursor: pointer;
@@ -201,7 +201,7 @@ $slick-opacity-not-active: 0.25 !default;
                 font-size: $slick-dot-size;
                 line-height: 20px;
                 text-align: center;
-                color: $slick-dot-color;
+                color: white;
                 opacity: $slick-opacity-not-active;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
@@ -209,7 +209,7 @@ $slick-opacity-not-active: 0.25 !default;
         }
 
         &.slick-active button:before {
-            color: $slick-dot-color-active;
+            color: white;
             opacity: $slick-opacity-default;
         }
     }
